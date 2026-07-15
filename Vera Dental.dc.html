@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin:0; font-family:'Inter',sans-serif; color:#17212B; background:#fff; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  a { color:#183453; text-decoration:none; }
+  a:hover { color:#08AEB3; }
+  p { margin:0; text-wrap:pretty; }
+  h1,h2,h3 { margin:0; }
+  ::selection { background:#59C4C8; color:#fff; }
+  #dc-root header nav a:not(:last-child):hover { color:#08AEB3 !important; border-bottom-color:#08AEB3 !important; }
+
+  @keyframes vd-float { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-16px) rotate(2deg); } }
+  @keyframes vd-float-slow { 0%,100% { transform:translateY(0); } 50% { transform:translateY(14px); } }
+  @keyframes vd-hero-in { 0% { opacity:0; transform:scale(1.06); } 100% { opacity:1; transform:scale(1); } }
+  @keyframes vd-fade-up { 0% { opacity:0; transform:translateY(28px); } 100% { opacity:1; transform:translateY(0); } }
+  .vd-blob-1 { animation: vd-float 7s ease-in-out infinite; }
+  .vd-blob-2 { animation: vd-float-slow 5.5s ease-in-out infinite; }
+  .vd-hero-img { animation: vd-hero-in 1.1s cubic-bezier(0.22,1,0.36,1) both; }
+  #dc-root #pocetna h1 { animation: vd-fade-up 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+  #dc-root #pocetna p { animation: vd-fade-up 0.8s cubic-bezier(0.22,1,0.36,1) 0.12s both; }
+  #dc-root #galerija img { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+  #dc-root #galerija img:hover { transform: scale(1.05); }
+  @media (prefers-reduced-motion: reduce) { .vd-blob-1,.vd-blob-2,.vd-hero-img,#dc-root #pocetna h1,#dc-root #pocetna p { animation:none !important; } }
+  @media (max-width: 640px) {
+    #dc-root #pocetna { padding-top:40px !important; padding-bottom:48px !important; }
+    #dc-root #pocetna h1 { font-size:32px !important; }
+    #dc-root #pocetna .vd-hero-img { position:relative !important; width:100% !important; height:auto !important; aspect-ratio:4/5; }
+    #dc-root #pocetna .vd-hero-img { min-height:0 !important; }
+    #dc-root #pocetna .vd-blob-1, #dc-root #pocetna .vd-blob-2 { display:none !important; }
+    #dc-root #pocetna a { width:100%; text-align:center; }
+    #dc-root section a[href^="tel"], #dc-root section a[href^="mailto"] { word-break:break-word; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Dentist",
+  "name":"Vera Dental",
+  "description":"Privatna stomatološka ordinacija u Nišu.",
+  "address":{"@type":"PostalAddress","streetAddress":"Janka Veselinovića 6B","addressLocality":"Niš","addressCountry":"RS"},
+  "telephone":"+381603346860",
+  "image":"vera-dental-logo.png"
+}
+</script>
+</helmet>
+
+<header style="position:sticky; top:0; z-index:60; background:#fff; border-bottom:1px solid #E4EBEE;">
+  <div style="max-width:1100px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <a href="#pocetna" style="display:flex; align-items:center; gap:12px;">
+      <img src="vera-dental-logo.png" alt="Vera Dental logo" width="44" height="44" style="display:block; border-radius:8px;">
+      <span style="font-family:'Manrope',sans-serif; font-weight:800; font-size:20px; color:#183453; letter-spacing:-0.01em;">Vera Dental</span>
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex; align-items:center; gap:28px;">
+        <a href="#pocetna" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#183453; padding-bottom:4px; border-bottom:2px solid transparent; transition:color 0.18s ease, border-color 0.18s ease;" style-hover="color:#08AEB3; border-bottom-color:#08AEB3;">Početna</a>
+        <a href="#o-nama" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#183453; padding-bottom:4px; border-bottom:2px solid transparent; transition:color 0.18s ease, border-color 0.18s ease;" style-hover="color:#08AEB3; border-bottom-color:#08AEB3;">O nama</a>
+        <a href="#usluge" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#183453; padding-bottom:4px; border-bottom:2px solid transparent; transition:color 0.18s ease, border-color 0.18s ease;" style-hover="color:#08AEB3; border-bottom-color:#08AEB3;">Usluge</a>
+        <a href="#galerija" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#183453; padding-bottom:4px; border-bottom:2px solid transparent; transition:color 0.18s ease, border-color 0.18s ease;" style-hover="color:#08AEB3; border-bottom-color:#08AEB3;">Galerija</a>
+        <a href="#faq" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#183453; padding-bottom:4px; border-bottom:2px solid transparent; transition:color 0.18s ease, border-color 0.18s ease;" style-hover="color:#08AEB3; border-bottom-color:#08AEB3;">FAQ</a>
+        <a href="#kontakt" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#183453; padding-bottom:4px; border-bottom:2px solid transparent; transition:color 0.18s ease, border-color 0.18s ease;" style-hover="color:#08AEB3; border-bottom-color:#08AEB3;">Kontakt</a>
+        <a href="#kontakt" style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#fff; background:#183453; padding:12px 20px; border-radius:8px; transition:background 0.2s ease, transform 0.2s ease;" style-hover="background:#08AEB3; transform:translateY(-2px);">Zakažite pregled</a>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMobile }}" aria-label="Meni" style="display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px;">
+        <span style="display:block; width:24px; height:2px; background:#183453; border-radius:2px;"></span>
+        <span style="display:block; width:24px; height:2px; background:#183453; border-radius:2px;"></span>
+        <span style="display:block; width:24px; height:2px; background:#183453; border-radius:2px;"></span>
+      </button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ showMobilePanel }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid #E4EBEE; padding:8px 24px 20px; display:flex; flex-direction:column;">
+      <a href="#pocetna" onClick="{{ closeMobile }}" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:16px; color:#183453; padding:14px 0; border-bottom:1px solid #EEF2F4;">Početna</a>
+      <a href="#o-nama" onClick="{{ closeMobile }}" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:16px; color:#183453; padding:14px 0; border-bottom:1px solid #EEF2F4;">O nama</a>
+      <a href="#usluge" onClick="{{ closeMobile }}" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:16px; color:#183453; padding:14px 0; border-bottom:1px solid #EEF2F4;">Usluge</a>
+      <a href="#galerija" onClick="{{ closeMobile }}" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:16px; color:#183453; padding:14px 0; border-bottom:1px solid #EEF2F4;">Galerija</a>
+      <a href="#faq" onClick="{{ closeMobile }}" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:16px; color:#183453; padding:14px 0; border-bottom:1px solid #EEF2F4;">FAQ</a>
+      <a href="#kontakt" onClick="{{ closeMobile }}" style="font-family:'Manrope',sans-serif; font-weight:600; font-size:16px; color:#183453; padding:14px 0; border-bottom:1px solid #EEF2F4;">Kontakt</a>
+      <a href="#kontakt" onClick="{{ closeMobile }}" style="font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; color:#fff; background:#183453; padding:14px; border-radius:8px; text-align:center; margin-top:16px; transition:background 0.2s ease;" style-hover="background:#08AEB3;">Zakažite pregled</a>
+    </div>
+  </sc-if>
+</header>
+
+<main>
+
+<section id="pocetna" style="scroll-margin-top:90px; padding:clamp(56px,8vw,104px) 24px; background:#EDF6F6;">
+  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(40px,6vw,72px); align-items:center;">
+    <div data-reveal="">
+      <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:20px;">Vera Dental</div>
+      <h1 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(34px,5vw,58px); line-height:1.08; letter-spacing:-0.02em; color:#183453;">Stomatološka nega uz jasan dogovor i miran pristup</h1>
+      <p style="margin-top:24px; font-size:clamp(16px,1.4vw,19px); line-height:1.7; color:#64728A; max-width:520px;">Pregledamo stanje, objasnimo sve mogućnosti i zajedno biramo najbolji način lečenja.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;">
+        <a href="#kontakt" style="font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; color:#fff; background:#183453; padding:15px 28px; border-radius:8px; transition:background 0.2s ease, transform 0.2s ease;" style-hover="background:#08AEB3; transform:translateY(-2px);">Zakažite pregled</a>
+        <a href="tel:0603346860" style="font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; color:#183453; background:#fff; border:1px solid #CDD8DD; padding:15px 28px; border-radius:8px; transition:border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;" style-hover="border-color:#08AEB3; color:#08AEB3; transform:translateY(-2px);">Pozovite nas</a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:14px 28px; margin-top:36px; max-width:540px;">
+        <div style="display:flex; align-items:center; gap:10px; font-family:'Manrope',sans-serif; font-weight:600; font-size:14.5px; color:#183453;">
+          <span style="flex-shrink:0; width:22px; height:22px; border-radius:50%; background:#08AEB3; display:flex; align-items:center; justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 L10 17.5 L19 7"></path></svg>
+          </span>
+          Pregled i plan terapije
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-family:'Manrope',sans-serif; font-weight:600; font-size:14.5px; color:#183453;">
+          <span style="flex-shrink:0; width:22px; height:22px; border-radius:50%; background:#08AEB3; display:flex; align-items:center; justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 L10 17.5 L19 7"></path></svg>
+          </span>
+          Jasan dogovor
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-family:'Manrope',sans-serif; font-weight:600; font-size:14.5px; color:#183453;">
+          <span style="flex-shrink:0; width:22px; height:22px; border-radius:50%; background:#08AEB3; display:flex; align-items:center; justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 L10 17.5 L19 7"></path></svg>
+          </span>
+          Termin po dogovoru
+        </div>
+      </div>
+    </div>
+    <div data-reveal="" style="position:relative; min-height:clamp(380px,42vw,520px);">
+      <div class="vd-blob-1" style="position:absolute; top:-8px; right:8px; width:62%; height:70%; background:#59C4C8; border-radius:120px 120px 32px 32px; opacity:0.35;"></div>
+      <div class="vd-blob-2" style="position:absolute; bottom:-6px; left:0; width:120px; height:120px; background:#08AEB3; border-radius:60px 60px 24px 24px; opacity:0.18;"></div>
+      <div class="vd-hero-img" style="position:absolute; inset:0; margin:auto; width:88%; height:100%; background:#EBF1F3; border:1px solid #E4EBEE; border-radius:10px; overflow:hidden;">
+        <img src="img/hero.png" alt="Osmeh nakon estetske stomatologije — Vera Dental" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="o-nama" style="scroll-margin-top:90px; padding:clamp(72px,10vw,120px) 24px;">
+  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(40px,6vw,72px); align-items:center;">
+    <div>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Ordinacija u kojoj znate šta vas čeka</h2>
+      <p style="margin-top:22px; font-size:18px; line-height:1.75; color:#64728A; max-width:520px;">Kod nas pacijent uvek zna šta se radi i zašto. Pre svake terapije objasnimo stanje, korake i cenu, pa zajedno biramo šta dalje.</p>
+      <p style="margin-top:18px; font-size:18px; line-height:1.75; color:#64728A; max-width:520px;">Radimo bez žurbe, u mirnoj atmosferi, sa dovoljno vremena za svako pitanje.</p>
+    </div>
+    <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:clamp(28px,3vw,40px); display:flex; flex-direction:column; gap:24px;">
+      <div>
+        <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:#08AEB3;">Google recenzije</div>
+        <div style="margin-top:10px; display:flex; align-items:center; gap:12px;">
+          <div style="display:flex; gap:3px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          </div>
+          <span style="font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">5 / 5</span>
+        </div>
+      </div>
+      <div style="height:1px; background:#E4EBEE;"></div>
+      <div>
+        <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:#08AEB3;">Godina osnivanja</div>
+        <div style="margin-top:6px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">2017.</div>
+      </div>
+      <div style="height:1px; background:#E4EBEE;"></div>
+      <div>
+        <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:#08AEB3;">Adresa</div>
+        <div style="margin-top:6px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; line-height:1.35; color:#183453;">Janka Veselinovića 6B<br>Niš</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usluge" style="scroll-margin-top:90px; padding:clamp(72px,10vw,120px) 24px; background:#F5F9FA;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div data-reveal="" style="max-width:620px;">
+      <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:16px;">Usluge</div>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Šta radimo u ordinaciji</h2>
+    </div>
+    <div style="margin-top:48px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px;">
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; display:flex; flex-direction:column; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:56px; height:56px; border-radius:8px; background:#EAF6F6; display:flex; align-items:center; justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#08AEB3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.5" y1="15.5" x2="21" y2="21"></line></svg>
+        </div>
+        <h3 style="margin-top:22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Pregled</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A; flex:1;">Pregledamo stanje zuba i desni i pravimo jasan plan terapije.</p>
+        <a href="#kontakt" style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#08AEB3; display:inline-block; transition:transform 0.18s ease;" style-hover="transform:translateX(4px);">Zakažite →</a>
+      </div>
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; display:flex; flex-direction:column; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:56px; height:56px; border-radius:8px; background:#EAF6F6; display:flex; align-items:center; justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#08AEB3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"></rect><line x1="12" y1="8.5" x2="12" y2="15.5"></line><line x1="8.5" y1="12" x2="15.5" y2="12"></line></svg>
+        </div>
+        <h3 style="margin-top:22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Lečenje zuba</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A; flex:1;">Rešavamo karijes i upale uz plombe i lečenje kanala.</p>
+        <a href="#kontakt" style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#08AEB3; display:inline-block; transition:transform 0.18s ease;" style-hover="transform:translateX(4px);">Zakažite →</a>
+      </div>
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; display:flex; flex-direction:column; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:56px; height:56px; border-radius:8px; background:#EAF6F6; display:flex; align-items:center; justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#08AEB3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L13.6 10.4 L21 12 L13.6 13.6 L12 21 L10.4 13.6 L3 12 L10.4 10.4 Z"></path></svg>
+        </div>
+        <h3 style="margin-top:22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Estetska stomatologija</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A; flex:1;">Popravljamo boju i oblik zuba za prirodan osmeh.</p>
+        <a href="#kontakt" style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#08AEB3; display:inline-block; transition:transform 0.18s ease;" style-hover="transform:translateX(4px);">Zakažite →</a>
+      </div>
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; display:flex; flex-direction:column; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:56px; height:56px; border-radius:8px; background:#EAF6F6; display:flex; align-items:center; justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#08AEB3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><line x1="12" y1="3" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="21"></line><line x1="3" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="21" y2="12"></line><line x1="5.6" y1="5.6" x2="7.7" y2="7.7"></line><line x1="16.3" y1="16.3" x2="18.4" y2="18.4"></line><line x1="16.3" y1="7.7" x2="18.4" y2="5.6"></line><line x1="5.6" y1="18.4" x2="7.7" y2="16.3"></line></svg>
+        </div>
+        <h3 style="margin-top:22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Profesionalno čišćenje zuba</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A; flex:1;">Uklanjamo kamenac i naslage i vraćamo prirodan sjaj.</p>
+        <a href="#kontakt" style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#08AEB3; display:inline-block; transition:transform 0.18s ease;" style-hover="transform:translateX(4px);">Zakažite →</a>
+      </div>
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; display:flex; flex-direction:column; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:56px; height:56px; border-radius:8px; background:#EAF6F6; display:flex; align-items:center; justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#08AEB3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 L18 9 L16.5 19 L7.5 19 Z"></path><line x1="9.5" y1="9" x2="9.5" y2="19"></line><line x1="14.5" y1="9" x2="14.5" y2="19"></line><path d="M7 9 C7 5.5 17 5.5 17 9"></path></svg>
+        </div>
+        <h3 style="margin-top:22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Protetika</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A; flex:1;">Nadoknađujemo zube krunicama, mostovima i protezama.</p>
+        <a href="#kontakt" style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#08AEB3; display:inline-block; transition:transform 0.18s ease;" style-hover="transform:translateX(4px);">Zakažite →</a>
+      </div>
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; display:flex; flex-direction:column; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:56px; height:56px; border-radius:8px; background:#EAF6F6; display:flex; align-items:center; justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#08AEB3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="10" r="4"></circle><circle cx="16.5" cy="12.5" r="2.6"></circle></svg>
+        </div>
+        <h3 style="margin-top:22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Dečja stomatologija</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A; flex:1;">Pažljiv i strpljiv pristup najmlađim pacijentima.</p>
+        <a href="#kontakt" style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:600; font-size:15px; color:#08AEB3; display:inline-block; transition:transform 0.18s ease;" style-hover="transform:translateX(4px);">Zakažite →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(72px,10vw,120px) 24px; background:#EDF6F6;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div data-reveal="" style="max-width:620px;">
+      <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:16px;">Prvi dolazak</div>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Kako izgleda prvi dolazak</h2>
+    </div>
+    <div style="margin-top:48px; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;">
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:44px; height:44px; border-radius:8px; background:#183453; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Manrope',sans-serif; font-weight:800; font-size:18px;">1</div>
+        <h3 style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Razgovor</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A;">Slušamo šta vas muči i šta želite da rešite.</p>
+      </div>
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:44px; height:44px; border-radius:8px; background:#183453; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Manrope',sans-serif; font-weight:800; font-size:18px;">2</div>
+        <h3 style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Pregled</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A;">Pregledamo zube i desni i utvrđujemo stanje.</p>
+      </div>
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="width:44px; height:44px; border-radius:8px; background:#183453; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Manrope',sans-serif; font-weight:800; font-size:18px;">3</div>
+        <h3 style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:700; font-size:20px; color:#183453;">Plan terapije</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A;">Predlažemo korake i cenu, pa zajedno odlučujemo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(72px,10vw,120px) 24px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div data-reveal="" style="max-width:620px;">
+      <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:16px;">Utisci korisnika</div>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Šta kažu naši pacijenti</h2>
+    </div>
+    <div data-reveal="" style="margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:18px 28px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2c-.3 1.4-1.1 2.6-2.3 3.4v2.8h3.7C21.8 18.7 23 15.8 23 12.3z"></path><path fill="#34A853" d="M12 24c3.1 0 5.7-1 7.6-2.8l-3.7-2.8c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.8H1.8v2.9C3.7 21.4 7.5 24 12 24z"></path><path fill="#FBBC05" d="M5.6 14.7c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7.4H1.8C1 8.9.6 10.4.6 12.5s.4 3.6 1.2 5.1l3.8-2.9z"></path><path fill="#EA4335" d="M12 5.5c1.7 0 3.2.6 4.4 1.7l3.3-3.3C17.7 1.9 15.1.9 12 .9 7.5.9 3.7 3.5 1.8 7.4l3.8 2.9C6.5 7.5 9 5.5 12 5.5z"></path></svg>
+        <div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-family:'Manrope',sans-serif; font-weight:800; font-size:24px; color:#183453;">5.0</span>
+            <span style="display:flex; gap:2px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5A623"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+            </span>
+          </div>
+          <div style="font-size:14px; color:#64728A;">Ocena na Google recenzijama</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-left:auto;">
+        <a href="https://www.google.com/maps/place/Vera+Dental/@43.316113,21.8947669,17z/data=!4m16!1m9!3m8!1s0x4755b0b3e5509b21:0xf6e5398e669b3685!2sVera+Dental!8m2!3d43.316113!4d21.8973418!9m1!1b1!16s%2Fg%2F11g02t54pz" target="_blank" rel="noopener" style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#fff; background:#183453; padding:13px 22px; border-radius:8px; transition:background 0.2s ease, transform 0.2s ease;" style-hover="background:#08AEB3; transform:translateY(-2px);">Ostavite recenziju</a>
+        <a href="https://www.google.com/maps/place/Vera+Dental/@43.316113,21.8947669,17z/data=!4m16!1m9!3m8!1s0x4755b0b3e5509b21:0xf6e5398e669b3685!2sVera+Dental!8m2!3d43.316113!4d21.8973418!9m1!1b1!16s%2Fg%2F11g02t54pz" target="_blank" rel="noopener" style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#183453; background:#fff; border:1px solid #CDD8DD; padding:13px 22px; border-radius:8px; transition:border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;" style-hover="border-color:#08AEB3; color:#08AEB3; transform:translateY(-2px);">Pogledajte sve recenzije</a>
+      </div>
+    </div>
+    <div style="margin-top:48px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px;">
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="display:flex; gap:3px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+        </div>
+        <p style="margin-top:18px; font-size:16px; line-height:1.7; color:#17212B;">Не 5 него чиста 10ка. 10ка за услугу, стручност, љубазност, и најважније за оне који оду код стоматолога 10ка за људскост. Најбоља ординација у Нишу❤️</p>
+        <div style="margin-top:22px; display:flex; align-items:center; gap:12px;">
+          
+          <div>
+            <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#183453;">Jasna Z.</div>
+            <div style="font-size:13px; color:#64728A;">Google recenzija</div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="display:flex; gap:3px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+        </div>
+        <p style="margin-top:18px; font-size:16px; line-height:1.7; color:#17212B;">Sve na jednom mestu, svaka preporuka, stručnost,ljubaznost, dr za resavanje svakog problema u ustima!</p>
+        <div style="margin-top:22px; display:flex; align-items:center; gap:12px;">
+          
+          <div>
+            <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#183453;">Milena Čolić</div>
+            <div style="font-size:13px; color:#64728A;">Google recenzija</div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <div style="display:flex; gap:3px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#08AEB3"><path d="M12 3 L14.7 9.2 L21.4 9.8 L16.3 14.2 L17.9 20.8 L12 17.2 L6.1 20.8 L7.7 14.2 L2.6 9.8 L9.3 9.2 Z"></path></svg>
+        </div>
+        <p style="margin-top:18px; font-size:16px; line-height:1.7; color:#17212B;">Perfektna usluga. Ljubazno osoblje I sve odradjeno kako smo se dogovorili... Preporuka</p>
+        <div style="margin-top:22px; display:flex; align-items:center; gap:12px;">
+          
+          <div>
+            <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#183453;">Nebojša Nakić</div>
+            <div style="font-size:13px; color:#64728A;">Google recenzija</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="galerija" style="scroll-margin-top:90px; padding:clamp(72px,10vw,120px) 24px; background:#EDF6F6;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div data-reveal="" style="max-width:620px;">
+      <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:16px;">Galerija</div>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Naš prostor i radovi</h2>
+    </div>
+    <div data-reveal="" style="margin-top:48px; position:relative;">
+      <div style="overflow:hidden;">
+        <div style="{{ trackStyle }}">
+          <sc-for list="{{ slides }}" as="slide" hint-placeholder-count="3">
+            <div style="flex:0 0 calc((100% - 48px) / 3); border-radius:10px; overflow:hidden; border:1px solid #D9E5E7; background:#0d1b26; position:relative; height:clamp(200px,22vw,280px);">
+              <sc-if value="{{ slide.hasImg }}" hint-placeholder-val="{{ true }}">
+                <img src="{{ slide.src }}" alt="{{ slide.alt }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+              </sc-if>
+              <sc-if value="{{ slide.isPh }}" hint-placeholder-val="{{ false }}">
+                <div style="width:100%; height:100%; background:#E7EEF0; display:flex; align-items:center; justify-content:center; padding:16px;">
+                  <span style="font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#64728A; text-align:center;">{{ slide.alt }}</span>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <button onClick="{{ prev }}" aria-label="Prethodne slike" style="position:absolute; top:50%; left:-8px; transform:translateY(-50%); width:46px; height:46px; border-radius:50%; border:none; background:rgba(255,255,255,0.95); color:#183453; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(9,20,28,0.22); transition:background 0.2s ease, transform 0.2s ease;" style-hover="background:#fff; transform:translateY(-50%) scale(1.08);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"></path></svg>
+      </button>
+      <button onClick="{{ next }}" aria-label="Sledeće slike" style="position:absolute; top:50%; right:-8px; transform:translateY(-50%); width:46px; height:46px; border-radius:50%; border:none; background:rgba(255,255,255,0.95); color:#183453; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(9,20,28,0.22); transition:background 0.2s ease, transform 0.2s ease;" style-hover="background:#fff; transform:translateY(-50%) scale(1.08);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 L16 12 L9 19"></path></svg>
+      </button>
+
+      <div style="margin-top:24px; display:flex; justify-content:center; gap:10px;">
+        <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="8">
+          <button onClick="{{ dot.onClick }}" aria-label="{{ dot.label }}" style="{{ dot.style }}"></button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(72px,10vw,120px) 24px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div data-reveal="" style="max-width:620px;">
+      <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:16px;">Zašto Vera Dental</div>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Razlozi da nam verujete</h2>
+    </div>
+    <div style="margin-top:48px; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;">
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:19px; color:#183453;">Moderan prostor</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A;">Čista i uredna ordinacija u kojoj se lako opustite.</p>
+      </div>
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:19px; color:#183453;">Savremena oprema</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A;">Radimo uređajima koji terapiju čine preciznom.</p>
+      </div>
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:19px; color:#183453;">Individualan pristup</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A;">Terapiju prilagođavamo svakom pacijentu.</p>
+      </div>
+      <div data-reveal="" style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; padding:32px; transition:opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease;" style-hover="transform:translateY(-6px); border-color:#59C4C8;">
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:19px; color:#183453;">Jasan plan terapije</h3>
+        <p style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#64728A;">Unapred znate korake, redosled i cenu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="scroll-margin-top:90px; padding:clamp(72px,10vw,120px) 24px; background:#EDF6F6;">
+  <div style="max-width:760px; margin:0 auto;">
+    <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:16px;">FAQ</div>
+    <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Česta pitanja</h2>
+    <div style="margin-top:40px; display:flex; flex-direction:column; gap:12px;">
+      <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="5">
+        <div style="background:#fff; border:1px solid #E4EBEE; border-radius:8px; overflow:hidden;">
+          <button onClick="{{ item.onClick }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; background:none; border:none; cursor:pointer; padding:22px 24px; text-align:left;">
+            <span style="font-family:'Manrope',sans-serif; font-weight:700; font-size:17px; color:#183453;">{{ item.q }}</span>
+            <span style="{{ item.iconStyle }}">+</span>
+          </button>
+          <div style="{{ item.bodyStyle }}">
+            <p style="padding:0 24px 24px; font-size:16px; line-height:1.7; color:#64728A;">{{ item.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" style="scroll-margin-top:90px; padding:clamp(72px,10vw,120px) 24px;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div data-reveal="" style="max-width:620px;">
+      <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:#08AEB3; margin-bottom:16px;">Kontakt</div>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); line-height:1.15; letter-spacing:-0.02em; color:#183453;">Kontaktirajte nas</h2>
+    </div>
+    <div style="margin-top:48px; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:32px; align-items:start;">
+      <div style="background:#183453; border-radius:8px; padding:clamp(32px,3.5vw,44px); display:flex; flex-direction:column; align-items:flex-start;">
+        <div style="width:56px; height:56px; border-radius:8px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#59C4C8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5 L9.5 4 L10.5 8 L8.5 9.5 C9.5 12 12 14.5 14.5 15.5 L16 13.5 L20 14.5 L20.5 17.5 C20.5 19 19.3 20.2 17.8 20 C10.5 19 5 13.5 4 6.2 C3.8 4.7 5 3.5 6.5 3.5 Z"></path></svg>
+        </div>
+        <h3 style="margin-top:24px; font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(24px,2.6vw,30px); line-height:1.2; letter-spacing:-0.01em; color:#fff;">Zakažite pregled</h3>
+        <p style="margin-top:14px; font-size:16.5px; line-height:1.7; color:#A8B4C6;">Pozovite nas u toku radnog vremena i odmah dogovaramo termin koji vam odgovara. Bez čekanja i formulara.</p>
+        <a href="tel:0603346860" style="margin-top:28px; font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(22px,2.4vw,26px); color:#fff; letter-spacing:-0.01em; transition:color 0.2s ease;" style-hover="color:#59C4C8;">060 3346860</a>
+        <div style="margin-top:24px; align-self:stretch; display:flex; flex-wrap:wrap; gap:12px;">
+          <a href="tel:0603346860" style="flex:1 1 160px; text-align:center; font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; color:#183453; background:#59C4C8; padding:15px; border-radius:8px; transition:background 0.2s ease, transform 0.2s ease;" style-hover="background:#fff; transform:translateY(-2px);">Pozovite nas</a>
+          <a href="mailto:ordinacijakitanovic@gmail.com" style="flex:1 1 160px; text-align:center; font-family:'Manrope',sans-serif; font-weight:700; font-size:16px; color:#fff; background:transparent; border:1px solid rgba(255,255,255,0.35); padding:15px; border-radius:8px; transition:border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;" style-hover="border-color:#59C4C8; color:#59C4C8; transform:translateY(-2px);">Pošaljite mejl</a>
+        </div>
+      </div>
+      <div>
+        <div style="border:1px solid #E4EBEE; border-radius:8px; overflow:hidden; height:clamp(280px,32vw,340px);">
+          <iframe title="Mapa — Janka Veselinovića 6B, Niš" src="https://maps.google.com/maps?q=Janka%20Veselinovi%C4%87a%206B%2C%20Ni%C5%A1&amp;output=embed" style="width:100%; height:100%; border:0; display:block;" loading="lazy"></iframe>
+        </div>
+        <div style="margin-top:24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px;">
+          <div style="min-width:0;">
+            <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#08AEB3;">Adresa</div>
+            <div style="margin-top:6px; font-size:16px; line-height:1.5; color:#17212B;">Janka Veselinovića 6B, Niš</div>
+          </div>
+          <div style="min-width:0;">
+            <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#08AEB3;">Email</div>
+            <div style="margin-top:6px; font-size:16px;"><a href="mailto:ordinacijakitanovic@gmail.com" style="color:#17212B; overflow-wrap:anywhere;" style-hover="color:#08AEB3;">ordinacijakitanovic@gmail.com</a></div>
+          </div>
+          <div style="min-width:0;">
+            <div style="font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#08AEB3;">Radno vreme</div>
+            <div style="margin-top:6px; font-size:16px; line-height:1.5; color:#17212B;">Pon – pet: 09:00 – 20:00<br>Vikendom ne radimo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:#183453; color:#fff; padding:clamp(56px,7vw,88px) 24px 32px;">
+  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px;">
+    <div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="vera-dental-logo.png" alt="Vera Dental logo" width="44" height="44" style="display:block; border-radius:8px;">
+        <span style="font-family:'Manrope',sans-serif; font-weight:800; font-size:20px; color:#fff;">Vera Dental</span>
+      </div>
+      <p style="margin-top:20px; font-size:15px; line-height:1.7; color:#A8B4C6;">Janka Veselinovića 6B<br>Niš<br><a href="tel:0603346860" style="color:#59C4C8;" style-hover="color:#fff;">060 3346860</a></p>
+      <div style="margin-top:22px; display:flex; gap:12px;">
+        <a href="https://www.instagram.com/borakitanovic/?hl=en" target="_blank" rel="noopener" aria-label="Instagram" style="width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,0.22); color:#fff; display:flex; align-items:center; justify-content:center; transition:background 0.2s ease, border-color 0.2s ease, color 0.2s ease;" style-hover="background:#08AEB3; border-color:#08AEB3; color:#fff;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+        </a>
+        <a href="https://www.facebook.com/ordinacijaVeraDental/?locale=sr_RS" target="_blank" rel="noopener" aria-label="Facebook" style="width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,0.22); color:#fff; display:flex; align-items:center; justify-content:center; transition:background 0.2s ease, border-color 0.2s ease, color 0.2s ease;" style-hover="background:#08AEB3; border-color:#08AEB3; color:#fff;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.5l.4-3h-2.9V8.2c0-.9.3-1.5 1.6-1.5H16.6V4.1C16.2 4 15.2 4 14.1 4c-2.3 0-3.9 1.4-3.9 4v2H7.6v3h2.6v8h3.3z"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#fff; margin-bottom:16px;">Kontakt</div>
+      <p style="font-size:15px; line-height:1.9; color:#A8B4C6;">Email: <a href="mailto:ordinacijakitanovic@gmail.com" style="color:#59C4C8;" style-hover="color:#fff;">ordinacijakitanovic@gmail.com</a><br>Radno vreme: Pon – Pet, 09:00 – 20:00<br>Vikendom ne radimo</p>
+    </div>
+    <div>
+      <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:#fff; margin-bottom:16px;">Brzi linkovi</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <a href="#usluge" style="font-size:15px; color:#A8B4C6;" style-hover="color:#59C4C8;">Usluge</a>
+        <a href="#galerija" style="font-size:15px; color:#A8B4C6;" style-hover="color:#59C4C8;">Galerija</a>
+        <a href="#faq" style="font-size:15px; color:#A8B4C6;" style-hover="color:#59C4C8;">FAQ</a>
+        <a href="#kontakt" style="font-size:15px; color:#A8B4C6;" style-hover="color:#59C4C8;">Kontakt</a>
+        
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1100px; margin:40px auto 0; padding-top:24px; border-top:1px solid rgba(255,255,255,0.12); font-size:14px; color:#7E8CA3;">© 2025 Vera Dental. Sva prava zadržana.</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { isMobile: false, mobileOpen: false, openFaq: 0, slide: 0 };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const m = window.innerWidth < 768;
+      if (m !== this.state.isMobile) {
+        this.setState({ isMobile: m, mobileOpen: m ? this.state.mobileOpen : false });
+      }
+    };
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+    this._autoplay = setInterval(() => {
+      this.setState(s => ({ slide: s.slide >= (this._maxStart || 0) ? 0 : s.slide + 1 }));
+    }, 5000);
+    requestAnimationFrame(() => this._initReveal());
+  }
+  componentWillUnmount() {
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._autoplay) clearInterval(this._autoplay);
+    if (this._io) this._io.disconnect();
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._revealFallback) clearTimeout(this._revealFallback);
+  }
+  _goTo(i) {
+    if (this._autoplay) { clearInterval(this._autoplay); this._autoplay = null; }
+    const max = this._maxStart || 0;
+    this.setState({ slide: Math.max(0, Math.min(i, max)) });
+  }
+  _reveal(el) {
+    if (!el || el.__shown) return;
+    el.__shown = true;
+    const delay = (el.__ri || 0) * 90;
+    setTimeout(() => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, delay);
+  }
+  _initReveal() {
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!els.length) return;
+    els.forEach(el => {
+      const sibs = Array.from(el.parentElement.children).filter(c => c.hasAttribute('data-reveal'));
+      el.__ri = Math.max(0, sibs.indexOf(el));
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.25s ease';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+    });
+    const start = () => {
+      const h = window.innerHeight || document.documentElement.clientHeight;
+      els.forEach(el => { if (el.getBoundingClientRect().top < h * 0.92) this._reveal(el); });
+      if ('IntersectionObserver' in window) {
+        this._io = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { this._reveal(e.target); this._io.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+        els.forEach(el => { if (!el.__shown) this._io.observe(el); });
+      }
+      this._onScroll = () => {
+        const hh = window.innerHeight || document.documentElement.clientHeight;
+        els.forEach(el => { if (!el.__shown && el.getBoundingClientRect().top < hh * 0.92) this._reveal(el); });
+      };
+      window.addEventListener('scroll', this._onScroll, { passive: true });
+      this._revealFallback = setTimeout(() => els.forEach(el => this._reveal(el)), 3000);
+    };
+    // Let the hidden state paint first so the transition actually runs.
+    requestAnimationFrame(() => requestAnimationFrame(start));
+  }
+
+  renderVals() {
+    const data = [
+      { q: 'Kako zakazujem pregled?', a: 'Pozovite nas na 060 3346860 ili pošaljite mejl. Javljamo se i dogovaramo termin koji vam odgovara.' },
+      { q: 'Šta treba da ponesem?', a: 'Ponesite ličnu kartu i, ako imate, ranije snimke ili nalaze. Nije obavezno.' },
+      { q: 'Koliko traje pregled?', a: 'Prvi pregled obično traje 20 do 30 minuta. Tada pregledamo stanje i napravimo plan terapije.' },
+      { q: 'Koje načine plaćanja prihvatate?', a: '[NAČINI PLAĆANJA — dopuniti pravim podacima.]' },
+      { q: 'Gde se nalazi ordinacija?', a: 'Nalazimo se na adresi Janka Veselinovića 6B u Nišu. Mapu možete videti u sekciji Kontakt.' },
+    ];
+    const faqs = data.map((f, i) => {
+      const open = this.state.openFaq === i;
+      return {
+        q: f.q,
+        a: f.a,
+        isOpen: open,
+        onClick: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })),
+        iconStyle: { flexShrink: 0, fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: '24px', lineHeight: 1, color: '#08AEB3', transition: 'transform 0.2s ease', transform: open ? 'rotate(45deg)' : 'rotate(0deg)' },
+        bodyStyle: {
+          maxHeight: open ? '320px' : '0px',
+          overflow: 'hidden',
+          transition: 'max-height 0.25s ease',
+        },
+      };
+    });
+
+    const gallery = [
+      { src: 'img/vera-ordinacija.jpg', alt: 'Ordinacija Vera Dental', hasImg: true, isPh: false },
+      { src: 'img/ordinacija2.jpg', alt: 'Stomatološka stolica i oprema', hasImg: true, isPh: false },
+      { src: 'img/rad-u-toku.jpg', alt: 'Rad u toku', hasImg: true, isPh: false },
+      { src: 'img/primer-rada.jpg', alt: 'Primer rada — pre i posle', hasImg: true, isPh: false },
+      { src: 'img/primer-rada-2.jpg', alt: 'Primer rada — estetska stomatologija', hasImg: true, isPh: false },
+      { src: 'img/dete-i-zubar.jpg', alt: 'Dečja stomatologija', hasImg: true, isPh: false },
+      { src: 'img/instrument.jpg', alt: 'Profesionalno čišćenje zuba', hasImg: true, isPh: false },
+      { src: 'img/ordinacija3.jpg', alt: 'Ordinacija', hasImg: true, isPh: false },
+      { src: 'img/primer-rada-3.jpg', alt: 'Primer rada — pre i posle', hasImg: true, isPh: false },
+      { src: 'img/lep-osmeh.jpg', alt: 'Lep osmeh — rezultat rada', hasImg: true, isPh: false },
+    ];
+    const perView = this.state.isMobile ? 1 : 3;
+    const maxStart = Math.max(0, gallery.length - perView);
+    this._maxStart = maxStart;
+    const cur = Math.min(this.state.slide, maxStart);
+    const pages = maxStart + 1;
+    const dots = [];
+    for (let i = 0; i < pages; i++) {
+      const active = i === cur;
+      dots.push({
+        label: 'Prikaži slike od ' + (i + 1),
+        onClick: () => this._goTo(i),
+        style: {
+          width: active ? '28px' : '10px', height: '10px', borderRadius: '999px',
+          border: 'none', cursor: 'pointer', padding: 0,
+          background: active ? '#08AEB3' : '#B9CBCE',
+          transition: 'width 0.25s ease, background 0.25s ease',
+        },
+      });
+    }
+    const stepPx = perView === 1
+      ? 'translateX(calc(-' + cur + ' * (100% + 24px)))'
+      : 'translateX(calc(-' + cur + ' * ((100% - 48px) / 3 + 24px)))';
+
+    return {
+      isMobile: this.state.isMobile,
+      isDesktop: !this.state.isMobile,
+      mobileOpen: this.state.mobileOpen,
+      showMobilePanel: this.state.isMobile && this.state.mobileOpen,
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      closeMobile: () => this.setState({ mobileOpen: false }),
+      faqs,
+      slides: gallery,
+      dots,
+      trackStyle: { display: 'flex', gap: '24px', transition: 'transform 0.5s cubic-bezier(0.22,1,0.36,1)', transform: stepPx },
+      prev: () => this._goTo(cur - 1),
+      next: () => this._goTo(cur + 1),
+    };
+  }
+}
+</script>
+</body>
+</html>
